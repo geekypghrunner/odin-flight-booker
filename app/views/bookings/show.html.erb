@@ -1,0 +1,5 @@
+<%= "You are currently set to depart from #{@booking.flight.from_airport.code} and land at #{@booking.flight.to_airport.code} on #{@booking.flight.departure.strftime("%m/%d/%Y")}.  The following passengers are registered:" %>
+<% @booking.passengers.each do |p| %>
+    <%= p.name %>
+    <%= p.email %>
+<% end %>

@@ -1,0 +1,17 @@
+<%= form_tag(root_path, :method => "get") do %>
+    <%= select_tag(:from_airport_id, options_for_select(@airport_options)) %>
+    <%= select_tag(:to_airport_id, options_for_select(@airport_options)) %>
+    <%= select("get","person_count", (1..4).to_a) %>
+    <%= select_tag(:departure, options_from_collection_for_select(@departure_options, 'departure', :departure_date_formatted)) %>
+    <%= submit_tag %>
+<% end %>
+
+<% if @flight_options.any? %>
+    <%= form_tag(new_booking_path, :method => "get") do %>
+        <%= collection_radio_buttons(:flight, :id, @flight_options, :id, :flight_info) %>
+        <%= hidden_field_tag("person_count", params[:get][:person_count]) %>
+        <%= submit_tag %>
+    <% end %>
+<% else %>
+    No flights avaiable.
+<% end %>

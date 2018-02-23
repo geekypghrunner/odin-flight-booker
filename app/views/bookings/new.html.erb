@@ -1,0 +1,15 @@
+<%= "You have chosen a flight that will depart from #{Airport.find(@flight_info.from_airport_id).code} and travel to #{Airport.find(@flight_info.to_airport_id).code} leaving on #{@flight_info.departure_date_formatted}." %>
+<p>Please enter the passenger information below:</p>
+<%= form_for @booking do |f| %>
+    <%= hidden_field_tag("flight_id", params[:flight][:id]) %>
+    <% params[:person_count].to_i.times do |i| %>
+        <%= f.fields_for "#{i}", @booking.passengers.build do |pass_form| %>
+            <%= pass_form.label "Passenger #{i+1}" %>
+            <%= pass_form.label :name %>
+            <%= pass_form.text_field :name %>
+            <%= pass_form.label :email %>
+            <%= pass_form.text_field :email %>
+        <% end %>
+        <% end %>
+    <%= f.submit %>
+<% end %>
